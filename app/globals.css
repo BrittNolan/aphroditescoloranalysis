@@ -2,28 +2,33 @@
 
 /* ───────────────────────────────────────────────────────────────
    APHRODITE'S COLOR ANALYSIS — design system
-   "A modern art-house gallery for your colors."
-   Editorial whitespace · soft daylight · hand-touched detail.
+   Dark, romantic, candlelit. Antique rose on warm charcoal.
+   Faithful to her brand; elevated to a couture polish.
    ─────────────────────────────────────────────────────────────── */
 
 @theme {
-  /* palette */
-  --color-marble: #faf7f2; /* warm gallery-wall background */
-  --color-marble-deep: #f3ece1; /* elevated bands */
-  --color-rose: #c98b8b; /* signature accent / CTAs (dusty antique rose) */
-  --color-rose-deep: #b3736f; /* hover / pressed */
-  --color-ink: #2b2a33; /* primary text & headers (violet-warm near-black) */
-  --color-ink-soft: #6c6873; /* body text, muted */
-  --color-laurel: #7c7a52; /* secondary accent — the goddess's laurel */
-  --color-gild: #c9a86a; /* fine lines, gold accents (used sparingly) */
-  --color-seaglass: #e8ebe6; /* soft UI panels / intake step backgrounds */
-  --color-blush: #f1deda; /* lightest rose — tints, progress fills, mats */
+  /* surfaces */
+  --color-canvas: #15110f; /* warm near-black — the page */
+  --color-canvas-2: #1e1714; /* elevated bands / cards */
+  --color-canvas-3: #100c0b; /* deepest — footer */
 
-  /* the four seasons — recurring accent motif */
-  --color-spring: #f2a98c;
-  --color-summer: #cf97a8;
-  --color-autumn: #b9763f;
-  --color-winter: #5b3a59;
+  /* ink on dark */
+  --color-ivory: #f4eae4; /* headings */
+  --color-text: #c8b7af; /* body */
+  --color-dim: #968981; /* muted / captions */
+
+  /* accents */
+  --color-rose: #d98e94; /* signature antique rose */
+  --color-rose-deep: #c2727a; /* hover / pressed */
+  --color-blush: #e9bebc; /* light rose tint */
+  --color-gold: #c9a86a; /* restrained gold leaf */
+  --color-laurel: #8c9070; /* the goddess's laurel — secondary */
+
+  /* the four seasons — palette/bracelet motif */
+  --color-spring: #f0a884;
+  --color-summer: #d49aac;
+  --color-autumn: #c07b3e;
+  --color-winter: #7a4b6e;
 
   --font-display: var(--ff-display), Georgia, serif;
   --font-sans: var(--ff-sans), ui-sans-serif, system-ui, sans-serif;
@@ -42,67 +47,68 @@ html {
 }
 
 body {
-  background: var(--color-marble);
-  color: var(--color-ink);
+  background: var(--color-canvas);
+  color: var(--color-text);
   font-family: var(--font-sans);
   font-weight: 400;
   font-size: 16px;
-  line-height: 1.65;
-  letter-spacing: -0.003em;
+  line-height: 1.7;
   overflow-x: hidden;
 }
 
 ::selection {
   background: var(--color-rose);
-  color: var(--color-marble);
+  color: var(--color-canvas);
 }
 
-/* ── Typography helpers ───────────────────────────────────────── */
+/* ── Typography ───────────────────────────────────────────────── */
 .font-display {
   font-family: var(--font-display);
-  font-optical-sizing: auto;
 }
 
 .eyebrow {
   font-family: var(--font-sans);
   font-size: 0.6875rem;
   font-weight: 600;
-  letter-spacing: 0.26em;
+  letter-spacing: 0.32em;
   text-transform: uppercase;
-  color: var(--color-rose-deep);
+  color: var(--color-rose);
 }
 
 .display-xl {
   font-family: var(--font-display);
-  font-weight: 300;
-  line-height: 1.02;
-  letter-spacing: -0.02em;
-  font-size: clamp(2.9rem, 7.2vw, 6.5rem);
+  font-weight: 500;
+  line-height: 1.04;
+  letter-spacing: -0.01em;
+  font-size: clamp(2.9rem, 7vw, 6rem);
+  color: var(--color-ivory);
 }
 .display-lg {
   font-family: var(--font-display);
-  font-weight: 300;
-  line-height: 1.06;
-  letter-spacing: -0.015em;
-  font-size: clamp(2.2rem, 4.6vw, 4rem);
+  font-weight: 500;
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  font-size: clamp(2.1rem, 4.4vw, 3.7rem);
+  color: var(--color-ivory);
 }
 .display-md {
   font-family: var(--font-display);
-  font-weight: 400;
-  line-height: 1.12;
-  letter-spacing: -0.01em;
-  font-size: clamp(1.6rem, 2.6vw, 2.4rem);
+  font-weight: 500;
+  line-height: 1.14;
+  font-size: clamp(1.55rem, 2.6vw, 2.3rem);
+  color: var(--color-ivory);
 }
 em.accent,
 .accent {
   font-style: italic;
-  color: var(--color-rose-deep);
+  font-weight: 400;
+  color: var(--color-rose);
 }
 
 /* ── Layout ───────────────────────────────────────────────────── */
 .container-x {
   width: 100%;
-  max-width: 1240px;
+  max-width: 1200px;
   margin: 0 auto;
   padding-inline: clamp(1.25rem, 5vw, 4rem);
 }
@@ -110,11 +116,19 @@ em.accent,
   padding-block: clamp(4.5rem, 9vw, 9rem);
 }
 
-/* hairline with a one-time gold glint on reveal */
+/* candlelit radial glow */
+.glow {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(10px);
+}
+
+/* hairline with a one-time gold glint */
 .hairline {
   position: relative;
   height: 1px;
-  background: color-mix(in srgb, var(--color-gild) 38%, transparent);
+  background: color-mix(in srgb, var(--color-gold) 30%, transparent);
   overflow: hidden;
 }
 .hairline::after {
@@ -122,7 +136,7 @@ em.accent,
   position: absolute;
   inset: 0 auto 0 -30%;
   width: 30%;
-  background: linear-gradient(90deg, transparent, var(--color-gild), transparent);
+  background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
   opacity: 0;
 }
 .hairline.is-shown::after {
@@ -152,46 +166,38 @@ em.accent,
   justify-content: center;
   gap: 0.55rem;
   font-family: var(--font-sans);
-  font-size: 0.78rem;
+  font-size: 0.76rem;
   font-weight: 600;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   padding: 1.05rem 1.9rem;
   border-radius: 999px;
   cursor: pointer;
-  transition: background 0.35s var(--ease-out-quint),
-    color 0.35s var(--ease-out-quint), border-color 0.35s var(--ease-out-quint),
-    transform 0.35s var(--ease-out-quint), box-shadow 0.35s var(--ease-out-quint);
+  transition: background 0.35s var(--ease-out-quint), color 0.35s var(--ease-out-quint),
+    border-color 0.35s var(--ease-out-quint), transform 0.35s var(--ease-out-quint),
+    box-shadow 0.35s var(--ease-out-quint);
   border: 1px solid transparent;
   text-align: center;
   line-height: 1;
 }
 .btn-primary {
   background: var(--color-rose);
-  color: var(--color-marble);
-  box-shadow: 0 1px 0 color-mix(in srgb, var(--color-rose-deep) 40%, transparent);
+  color: #1a1310;
+  box-shadow: 0 10px 30px -14px color-mix(in srgb, var(--color-rose) 80%, transparent);
 }
 .btn-primary:hover {
-  background: var(--color-rose-deep);
+  background: var(--color-blush);
   transform: translateY(-2px);
-  box-shadow: 0 14px 30px -12px color-mix(in srgb, var(--color-rose-deep) 70%, transparent);
+  box-shadow: 0 18px 38px -16px color-mix(in srgb, var(--color-rose) 90%, transparent);
 }
 .btn-ghost {
   background: transparent;
-  color: var(--color-ink);
-  border-color: color-mix(in srgb, var(--color-ink) 22%, transparent);
+  color: var(--color-ivory);
+  border-color: color-mix(in srgb, var(--color-ivory) 28%, transparent);
 }
 .btn-ghost:hover {
-  border-color: var(--color-ink);
-  background: color-mix(in srgb, var(--color-ink) 4%, transparent);
-}
-.btn-light {
-  background: var(--color-marble);
-  color: var(--color-ink);
-}
-.btn-light:hover {
-  background: #fff;
-  transform: translateY(-2px);
+  border-color: var(--color-rose);
+  color: var(--color-rose);
 }
 }
 
@@ -202,9 +208,9 @@ em.accent,
   display: inline-block;
   font-size: 0.72rem;
   font-weight: 600;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--color-rose-deep);
+  color: var(--color-rose);
   padding-bottom: 0.4rem;
 }
 .line-link::after {
@@ -230,13 +236,13 @@ em.accent,
   100% { transform: scaleX(1); transform-origin: left; }
 }
 
-/* film-grain overlay for hero depth */
+/* film grain */
 .grain::before {
   content: "";
   position: absolute;
   inset: 0;
   pointer-events: none;
-  opacity: 0.05;
+  opacity: 0.06;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
@@ -245,34 +251,29 @@ em.accent,
   animation: stepIn 0.55s var(--ease-out-quint);
 }
 @keyframes stepIn {
-  from {
-    opacity: 0;
-    transform: translateY(16px);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: none; }
 }
 
+@layer components {
 .field {
   width: 100%;
-  background: #fff;
-  border: 1px solid color-mix(in srgb, var(--color-ink) 14%, transparent);
+  background: color-mix(in srgb, var(--color-canvas-3) 80%, black);
+  border: 1px solid color-mix(in srgb, var(--color-ivory) 16%, transparent);
   border-radius: 14px;
   padding: 0.95rem 1.1rem;
   font-size: 1rem;
   font-family: var(--font-sans);
-  color: var(--color-ink);
+  color: var(--color-ivory);
   transition: border-color 0.25s var(--ease-out-quint), box-shadow 0.25s var(--ease-out-quint);
 }
 .field::placeholder {
-  color: color-mix(in srgb, var(--color-ink-soft) 70%, transparent);
+  color: color-mix(in srgb, var(--color-dim) 85%, transparent);
 }
 .field:focus {
   outline: none;
   border-color: var(--color-rose);
-  box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-rose) 18%, transparent);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-rose) 22%, transparent);
 }
 .field-label {
   display: block;
@@ -280,47 +281,46 @@ em.accent,
   font-weight: 600;
   letter-spacing: 0.02em;
   margin-bottom: 0.5rem;
-  color: var(--color-ink);
+  color: var(--color-ivory);
 }
 
-@layer components {
 .chip {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
   padding: 0.6rem 1rem;
   border-radius: 999px;
-  border: 1px solid color-mix(in srgb, var(--color-ink) 16%, transparent);
-  background: #fff;
+  border: 1px solid color-mix(in srgb, var(--color-ivory) 18%, transparent);
+  background: transparent;
   font-size: 0.86rem;
   cursor: pointer;
   transition: all 0.22s var(--ease-out-quint);
-  color: var(--color-ink);
+  color: var(--color-text);
 }
 .chip:hover {
   border-color: var(--color-rose);
+  color: var(--color-ivory);
 }
 .chip[aria-pressed="true"] {
   background: var(--color-rose);
   border-color: var(--color-rose);
-  color: var(--color-marble);
+  color: #1a1310;
 }
 }
 
 .progress-track {
   height: 5px;
   border-radius: 999px;
-  background: var(--color-blush);
+  background: color-mix(in srgb, var(--color-ivory) 12%, transparent);
   overflow: hidden;
 }
 .progress-fill {
   height: 100%;
   border-radius: 999px;
-  background: linear-gradient(90deg, var(--color-rose), var(--color-gild));
+  background: linear-gradient(90deg, var(--color-rose), var(--color-gold));
   transition: width 0.6s var(--ease-out-quint);
 }
 
-/* tasteful single-flourish gem fall on completion */
 .gem-fall {
   position: absolute;
   top: -24px;
@@ -328,32 +328,17 @@ em.accent,
   animation: gemFall 2.6s var(--ease-out-quint) forwards;
 }
 @keyframes gemFall {
-  0% {
-    opacity: 0;
-    transform: translateY(-30px) scale(0.6);
-  }
-  15% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-    transform: translateY(80vh) scale(1) rotate(120deg);
-  }
+  0% { opacity: 0; transform: translateY(-30px) scale(0.6); }
+  15% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(80vh) scale(1) rotate(120deg); }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-  *,
-  *::before,
-  *::after {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
     animation-duration: 0.001ms !important;
     animation-delay: 0s !important;
     transition-duration: 0.25s !important;
   }
-  .reveal {
-    opacity: 1;
-    transform: none;
-  }
+  .reveal { opacity: 1; transform: none; }
 }

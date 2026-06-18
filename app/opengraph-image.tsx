@@ -2,10 +2,10 @@ import { ImageResponse } from "next/og";
 
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
-export const alt = "Aphrodite's Color Analysis — find the colors that were always yours";
+export const alt = "Aphrodite's Color Analysis — find your unique colors";
 
 export default function OG() {
-  const stones = ["#f2a98c", "#cf97a8", "#c98b8b", "#b9763f", "#7c7a52", "#5b3a59", "#c9a86a"];
+  const stones = ["#f0a884", "#d49aac", "#d98e94", "#c07b3e", "#8c9070", "#7a4b6e", "#c9a86a"];
   return new ImageResponse(
     (
       <div
@@ -16,16 +16,16 @@ export default function OG() {
           flexDirection: "column",
           justifyContent: "space-between",
           padding: "72px",
-          background: "linear-gradient(135deg, #faf7f2 0%, #f1deda 55%, #e8ebe6 100%)",
+          background: "radial-gradient(circle at 78% 18%, #3a2329 0%, #1a1411 45%, #120d0c 100%)",
           fontFamily: "Georgia, serif",
         }}
       >
         <div
           style={{
             fontSize: 22,
-            letterSpacing: 6,
+            letterSpacing: 7,
             textTransform: "uppercase",
-            color: "#b3736f",
+            color: "#d98e94",
             fontFamily: "sans-serif",
             fontWeight: 600,
           }}
@@ -33,22 +33,15 @@ export default function OG() {
           Aphrodite&rsquo;s Color Analysis
         </div>
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <div style={{ fontSize: 78, lineHeight: 1.05, color: "#2b2a33" }}>
-            Find the colors that were
-          </div>
-          <div style={{ fontSize: 78, lineHeight: 1.05, color: "#b3736f", fontStyle: "italic" }}>
-            always yours.
-          </div>
-          <div style={{ fontSize: 30, color: "#6c6873", marginTop: 24, fontFamily: "sans-serif" }}>
-            Read by a human — a session, a written report, and a gemstone bracelet in your palette.
+          <div style={{ fontSize: 84, lineHeight: 1.04, color: "#f4eae4" }}>Find Your</div>
+          <div style={{ fontSize: 84, lineHeight: 1.04, color: "#d98e94", fontStyle: "italic" }}>Unique Colors</div>
+          <div style={{ fontSize: 28, color: "#c8b7af", marginTop: 24, fontFamily: "sans-serif" }}>
+            Read by a human — a session, a written report, and a gemstone bracelet in your colors.
           </div>
         </div>
         <div style={{ display: "flex", gap: 14, alignItems: "center" }}>
           {stones.map((c) => (
-            <div
-              key={c}
-              style={{ width: 44, height: 44, borderRadius: 999, background: c }}
-            />
+            <div key={c} style={{ width: 44, height: 44, borderRadius: 999, background: c }} />
           ))}
         </div>
       </div>

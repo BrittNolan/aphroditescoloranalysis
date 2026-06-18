@@ -27,19 +27,17 @@ export default function SiteHeader() {
       <header
         className="fixed inset-x-0 top-0 z-50 transition-[background,border-color,backdrop-filter] duration-500"
         style={{
-          background: scrolled ? "color-mix(in srgb, var(--color-marble) 88%, transparent)" : "transparent",
+          background: scrolled ? "color-mix(in srgb, var(--color-canvas) 85%, transparent)" : "transparent",
           backdropFilter: scrolled ? "blur(12px)" : "none",
           borderBottom: scrolled
-            ? "1px solid color-mix(in srgb, var(--color-gild) 24%, transparent)"
+            ? "1px solid color-mix(in srgb, var(--color-gold) 22%, transparent)"
             : "1px solid transparent",
         }}
       >
         <div className="container-x flex items-center justify-between py-4">
-          <Link href="/" className="font-display text-xl tracking-wide" style={{ letterSpacing: "0.02em" }}>
-            <span className="font-display" style={{ fontWeight: 500 }}>
-              Aphrodite&rsquo;s
-            </span>
-            <span className="ml-2 text-[0.62rem] font-semibold uppercase tracking-[0.28em] text-ink-soft align-middle">
+          <Link href="/" className="font-display text-xl text-ivory" style={{ letterSpacing: "0.01em" }}>
+            <span style={{ fontWeight: 600 }}>Aphrodite&rsquo;s</span>
+            <span className="ml-2 align-middle text-[0.6rem] font-semibold uppercase tracking-[0.28em] text-dim">
               Color Analysis
             </span>
           </Link>
@@ -49,7 +47,7 @@ export default function SiteHeader() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-[0.72rem] font-medium uppercase tracking-[0.16em] text-ink transition-colors hover:text-rose-deep"
+                className="text-[0.72rem] font-medium uppercase tracking-[0.16em] text-text transition-colors hover:text-rose"
               >
                 {item.label}
               </Link>
@@ -57,14 +55,14 @@ export default function SiteHeader() {
           </nav>
 
           <div className="flex items-center gap-3">
-            <Link href="/intake" className="btn btn-primary hidden sm:inline-flex !py-3 !px-5">
-              Begin Intake
+            <Link href="/#contact" className="btn btn-primary hidden sm:inline-flex !py-3 !px-5">
+              Book a Reading
             </Link>
             <button
               type="button"
               aria-label="Open menu"
               aria-expanded={open}
-              className="flex h-10 w-10 items-center justify-center lg:hidden"
+              className="flex h-10 w-10 items-center justify-center text-ivory lg:hidden"
               onClick={() => setOpen(true)}
             >
               <span className="sr-only">Menu</span>
@@ -80,7 +78,7 @@ export default function SiteHeader() {
       <div
         className="fixed inset-0 z-[60] flex flex-col items-center justify-center gap-7 transition-opacity duration-500 lg:hidden"
         style={{
-          background: "var(--color-marble)",
+          background: "var(--color-canvas)",
           opacity: open ? 1 : 0,
           pointerEvents: open ? "auto" : "none",
         }}
@@ -88,23 +86,18 @@ export default function SiteHeader() {
       >
         <button
           type="button"
-          className="absolute right-5 top-5 text-[0.7rem] font-semibold uppercase tracking-[0.22em] text-rose-deep"
+          className="absolute right-5 top-5 text-[0.7rem] font-semibold uppercase tracking-[0.22em] text-rose"
           onClick={() => setOpen(false)}
         >
           Close
         </button>
         {NAV.map((item) => (
-          <Link
-            key={item.href}
-            href={item.href}
-            className="font-display text-3xl"
-            onClick={() => setOpen(false)}
-          >
+          <Link key={item.href} href={item.href} className="font-display text-3xl text-ivory" onClick={() => setOpen(false)}>
             {item.label}
           </Link>
         ))}
-        <Link href="/intake" className="btn btn-primary mt-2" onClick={() => setOpen(false)}>
-          Begin Your Intake
+        <Link href="/#contact" className="btn btn-primary mt-2" onClick={() => setOpen(false)}>
+          Book a Reading
         </Link>
       </div>
     </>
