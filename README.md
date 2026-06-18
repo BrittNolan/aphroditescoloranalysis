@@ -1,36 +1,44 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Aphrodite's Color Analysis
 
-## Getting Started
+A rebuild of [aphroditescoloranalysis.com](https://aphroditescoloranalysis.com) — a virtual
+seasonal color-analysis studio. The brand's hooks: a color reading done **by a human, not an
+algorithm**, and a signature **gemstone bracelet hand-matched to your palette** that you keep.
 
-First, run the development server:
+The centerpiece is the **"Before Your Consultation" intake studio** — a free, guided, five-minute
+flow that captures skin-tone photos (in natural light, client-side), style goals, and questions so
+the live session goes straight to the good part. It reframes the old dead "Contact Us" form into the
+front door of the experience.
+
+> **This is a front-facing demo.** Nothing is wired to a backend — the intake, quiz, and gift flows
+> are fully interactive but submit nowhere. Photos are previewed in-browser only and never uploaded.
+
+## What's inside
+
+| Route       | What it is                                                                 |
+| ----------- | -------------------------------------------------------------------------- |
+| `/`         | The marketing home: hero, method, the four seasons, how-it-works, the bracelet, pricing + comparison, stories, the artist, FAQ. |
+| `/intake`   | **The hero feature** — a 6-step intake studio with photo capture + gentle lighting hints, style-goal chips, a review screen, autosave-to-`localStorage`, and a completion state. |
+| `/quiz`     | "Discover Your Season" — a playful interactive quiz that scores you into a season and routes you to the real reading. |
+| `/gift`     | Gift a session with a live-updating digital gift-card preview.             |
+
+## Design system
+
+- **Type:** Fraunces (editorial display serif) + Inter (UI/body).
+- **Palette:** Marble White, Aphrodite Rose, Aegean Ink, Olive Laurel, Gilded Sand, Sea-Glass Mist,
+  Shell Blush — with the four color seasons as a recurring accent motif.
+- **Visual language:** painterly color itself — SVG/CSS gemstone beads, bracelet strands, swatch
+  cards, and watercolor "blooms" — so there are no stock photos or copyright concerns. Real product
+  photography (founder, finished bracelets, before/after drapings) drops straight into these slots.
+
+## Tech
+
+Next.js 16 (App Router) · React 19 · TypeScript · Tailwind CSS v4. Static export — every route
+prerenders. Deployed on Vercel.
+
+## Develop
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev      # http://localhost:3000
+npm run build    # production build
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

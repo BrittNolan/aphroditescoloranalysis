@@ -1,26 +1,359 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ───────────────────────────────────────────────────────────────
+   APHRODITE'S COLOR ANALYSIS — design system
+   "A modern art-house gallery for your colors."
+   Editorial whitespace · soft daylight · hand-touched detail.
+   ─────────────────────────────────────────────────────────────── */
+
+@theme {
+  /* palette */
+  --color-marble: #faf7f2; /* warm gallery-wall background */
+  --color-marble-deep: #f3ece1; /* elevated bands */
+  --color-rose: #c98b8b; /* signature accent / CTAs (dusty antique rose) */
+  --color-rose-deep: #b3736f; /* hover / pressed */
+  --color-ink: #2b2a33; /* primary text & headers (violet-warm near-black) */
+  --color-ink-soft: #6c6873; /* body text, muted */
+  --color-laurel: #7c7a52; /* secondary accent — the goddess's laurel */
+  --color-gild: #c9a86a; /* fine lines, gold accents (used sparingly) */
+  --color-seaglass: #e8ebe6; /* soft UI panels / intake step backgrounds */
+  --color-blush: #f1deda; /* lightest rose — tints, progress fills, mats */
+
+  /* the four seasons — recurring accent motif */
+  --color-spring: #f2a98c;
+  --color-summer: #cf97a8;
+  --color-autumn: #b9763f;
+  --color-winter: #5b3a59;
+
+  --font-display: var(--ff-display), Georgia, serif;
+  --font-sans: var(--ff-sans), ui-sans-serif, system-ui, sans-serif;
+
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+* {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5.5rem;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-marble);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.65;
+  letter-spacing: -0.003em;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--color-rose);
+  color: var(--color-marble);
+}
+
+/* ── Typography helpers ───────────────────────────────────────── */
+.font-display {
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+}
+
+.eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--color-rose-deep);
+}
+
+.display-xl {
+  font-family: var(--font-display);
+  font-weight: 300;
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  font-size: clamp(2.9rem, 7.2vw, 6.5rem);
+}
+.display-lg {
+  font-family: var(--font-display);
+  font-weight: 300;
+  line-height: 1.06;
+  letter-spacing: -0.015em;
+  font-size: clamp(2.2rem, 4.6vw, 4rem);
+}
+.display-md {
+  font-family: var(--font-display);
+  font-weight: 400;
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  font-size: clamp(1.6rem, 2.6vw, 2.4rem);
+}
+em.accent,
+.accent {
+  font-style: italic;
+  color: var(--color-rose-deep);
+}
+
+/* ── Layout ───────────────────────────────────────────────────── */
+.container-x {
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding-inline: clamp(1.25rem, 5vw, 4rem);
+}
+.section-pad {
+  padding-block: clamp(4.5rem, 9vw, 9rem);
+}
+
+/* hairline with a one-time gold glint on reveal */
+.hairline {
+  position: relative;
+  height: 1px;
+  background: color-mix(in srgb, var(--color-gild) 38%, transparent);
+  overflow: hidden;
+}
+.hairline::after {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 -30%;
+  width: 30%;
+  background: linear-gradient(90deg, transparent, var(--color-gild), transparent);
+  opacity: 0;
+}
+.hairline.is-shown::after {
+  animation: glint 1.6s var(--ease-out-quint) 0.2s forwards;
+}
+@keyframes glint {
+  0% { left: -30%; opacity: 1; }
+  100% { left: 130%; opacity: 0; }
+}
+
+/* ── Scroll reveal ────────────────────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.9s var(--ease-out-quint), transform 0.9s var(--ease-out-quint);
+}
+.reveal.is-shown {
+  opacity: 1;
+  transform: none;
+}
+
+/* ── Buttons ──────────────────────────────────────────────────── */
+@layer components {
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 1.05rem 1.9rem;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.35s var(--ease-out-quint),
+    color 0.35s var(--ease-out-quint), border-color 0.35s var(--ease-out-quint),
+    transform 0.35s var(--ease-out-quint), box-shadow 0.35s var(--ease-out-quint);
+  border: 1px solid transparent;
+  text-align: center;
+  line-height: 1;
+}
+.btn-primary {
+  background: var(--color-rose);
+  color: var(--color-marble);
+  box-shadow: 0 1px 0 color-mix(in srgb, var(--color-rose-deep) 40%, transparent);
+}
+.btn-primary:hover {
+  background: var(--color-rose-deep);
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px -12px color-mix(in srgb, var(--color-rose-deep) 70%, transparent);
+}
+.btn-ghost {
+  background: transparent;
+  color: var(--color-ink);
+  border-color: color-mix(in srgb, var(--color-ink) 22%, transparent);
+}
+.btn-ghost:hover {
+  border-color: var(--color-ink);
+  background: color-mix(in srgb, var(--color-ink) 4%, transparent);
+}
+.btn-light {
+  background: var(--color-marble);
+  color: var(--color-ink);
+}
+.btn-light:hover {
+  background: #fff;
+  transform: translateY(-2px);
+}
+}
+
+/* erase-then-redraw underline link */
+@layer components {
+.line-link {
+  position: relative;
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-rose-deep);
+  padding-bottom: 0.4rem;
+}
+.line-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  transform-origin: right;
+  transition: transform 0.4s var(--ease-out-quint);
+}
+.line-link:hover::after {
+  animation: redraw 0.7s var(--ease-out-quint) forwards;
+}
+}
+
+@keyframes redraw {
+  0% { transform: scaleX(1); transform-origin: right; }
+  45% { transform: scaleX(0); transform-origin: right; }
+  55% { transform: scaleX(0); transform-origin: left; }
+  100% { transform: scaleX(1); transform-origin: left; }
+}
+
+/* film-grain overlay for hero depth */
+.grain::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ── Intake studio ────────────────────────────────────────────── */
+.step-anim {
+  animation: stepIn 0.55s var(--ease-out-quint);
+}
+@keyframes stepIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.field {
+  width: 100%;
+  background: #fff;
+  border: 1px solid color-mix(in srgb, var(--color-ink) 14%, transparent);
+  border-radius: 14px;
+  padding: 0.95rem 1.1rem;
+  font-size: 1rem;
+  font-family: var(--font-sans);
+  color: var(--color-ink);
+  transition: border-color 0.25s var(--ease-out-quint), box-shadow 0.25s var(--ease-out-quint);
+}
+.field::placeholder {
+  color: color-mix(in srgb, var(--color-ink-soft) 70%, transparent);
+}
+.field:focus {
+  outline: none;
+  border-color: var(--color-rose);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-rose) 18%, transparent);
+}
+.field-label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  margin-bottom: 0.5rem;
+  color: var(--color-ink);
+}
+
+@layer components {
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--color-ink) 16%, transparent);
+  background: #fff;
+  font-size: 0.86rem;
+  cursor: pointer;
+  transition: all 0.22s var(--ease-out-quint);
+  color: var(--color-ink);
+}
+.chip:hover {
+  border-color: var(--color-rose);
+}
+.chip[aria-pressed="true"] {
+  background: var(--color-rose);
+  border-color: var(--color-rose);
+  color: var(--color-marble);
+}
+}
+
+.progress-track {
+  height: 5px;
+  border-radius: 999px;
+  background: var(--color-blush);
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--color-rose), var(--color-gild));
+  transition: width 0.6s var(--ease-out-quint);
+}
+
+/* tasteful single-flourish gem fall on completion */
+.gem-fall {
+  position: absolute;
+  top: -24px;
+  border-radius: 50%;
+  animation: gemFall 2.6s var(--ease-out-quint) forwards;
+}
+@keyframes gemFall {
+  0% {
+    opacity: 0;
+    transform: translateY(-30px) scale(0.6);
+  }
+  15% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(80vh) scale(1) rotate(120deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-delay: 0s !important;
+    transition-duration: 0.25s !important;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
 }
